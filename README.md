@@ -85,6 +85,9 @@ lib/
 
 ## Capturas de pantalla
 
+### Pantalla de Login
+![Login](screenshots/login.png)
+
 ### Pantalla de Inicio
 ![Home](screenshots/home.png)
 
@@ -94,20 +97,20 @@ lib/
 ### Control de Portón
 ![Portón](screenshots/porton.png)
 
+### Portón Abierto.
+![Portón Abierto](screenshots/Porton_Abierto.png)
+
 ### Mi Alícuota
 ![Alícuota](screenshots/alicuota.png)
+
+### Pago de Alícuota con Comprobante
+![Pago](screenshots/pago.png)
 
 ### Familias Residentes.
 ![Familias](screenshots/Familias.png)
 
 ### Espacios de Parqueo
 ![Espacios](screenshots/espacios.png)
-
-### Pago de Alícuota con Comprobante
-![Pago](screenshots/pago.png)
-
-### Portón Abierto.
-![Portón Abierto](screenshots/Porton_Abierto.png)
 
 ### Registro de Vehículos
 ![Registro](screenshots/espacios_detalle.png)
