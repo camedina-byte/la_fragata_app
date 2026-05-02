@@ -62,6 +62,7 @@ La app nace como solución real a un problema concreto: 24 familias compartían 
 ---
 
 ## Estructura del proyecto
+```plaintext
 lib/
 ├── main.dart
 ├── data/
@@ -73,11 +74,12 @@ lib/
 ├── theme/
 │   └── tema_fragata.dart
 └── screens/
-├── home_screen.dart
-├── alicuota_screen.dart
-├── familias_screen.dart
-├── espacios_screen.dart
-└── porton_screen.dart
+    ├── home_screen.dart
+    ├── alicuota_screen.dart
+    ├── familias_screen.dart
+    ├── espacios_screen.dart
+    └── porton_screen.dart
+```
 
 ---
 
