@@ -95,8 +95,8 @@ lib/
 ### Mi Alícuota
 ![Alícuota](screenshots/alicuota.png)
 
-### Familias Residentes
-![Familias](screenshots/familias.png)
+### Familias Residentes.
+![Familias](screenshots/Familias.png)
 
 ### Espacios de Parqueo
 ![Espacios](screenshots/espacios.png)
@@ -104,7 +104,7 @@ lib/
 ### Pago de Alícuota con Comprobante
 ![Pago](screenshots/pago.png)
 
-### Portón Abierto
+### Portón Abierto.
 ![Portón Abierto](screenshots/porton_abierto.png)
 
 ### Registro de Vehículos
