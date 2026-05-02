@@ -3,6 +3,7 @@ import 'package:la_fragata_app/routes/rutas_fragata.dart';
 import 'package:la_fragata_app/theme/tema_fragata.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const LaFragataApp());
 }
 
