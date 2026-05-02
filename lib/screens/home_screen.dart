@@ -43,27 +43,14 @@ class _PantallaInicioState extends State<PantallaInicio> {
     },
   ];
 
-  final List<Map<String, dynamic>> _espacios = [
-    {
-      'nombre': 'Cuadra Principal',
-      'descripcion': 'Área de parqueo — Manzanas 2261 y 2262',
-      'icono': Icons.local_parking,
-      'disponible': true,
-    },
-    {
-      'nombre': 'Vereda Peatonal',
-      'descripcion': 'Zona exclusiva para peatones y niños',
-      'icono': Icons.directions_walk,
-      'disponible': true,
-    },
-    {
-      'nombre': 'Área de Reunión',
-      'descripcion': 'Espacio para reuniones de vecinos',
-      'icono': Icons.chair,
-      'disponible': false,
-    },
-  ];
-
+ final List<Map<String, dynamic>> _espacios = [
+  {
+    'nombre': 'Espacios de Parqueo',
+    'descripcion': 'Ver y gestionar vehículos por domicilio',
+    'icono': Icons.local_parking,
+    'disponible': true,
+  },
+];
   void _mostrarReserva(BuildContext context, Map<String, dynamic> espacio) {
     showDialog(
       context: context,
@@ -354,6 +341,15 @@ class _PantallaInicioState extends State<PantallaInicio> {
               onTap: () {
                 Navigator.pop(context);
                 Navigator.pushNamed(context, 'familias');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.local_parking,
+                  color: TemaFragata.azulMarino),
+              title: const Text('Espacios de Parqueo'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, 'espacios');
               },
             ),
             const Divider(),
@@ -708,7 +704,7 @@ class _PantallaInicioState extends State<PantallaInicio> {
                       : TemaFragata.rojoPendiente,
                   padding: EdgeInsets.zero,
                 ),
-                onTap: () => _mostrarReserva(context, espacio),
+                onTap: () => Navigator.pushNamed(context, 'espacios'),
               ),
             ),
           ),

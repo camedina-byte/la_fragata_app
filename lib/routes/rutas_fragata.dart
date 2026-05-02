@@ -4,6 +4,7 @@ import 'package:la_fragata_app/screens/alicuota_screen.dart';
 import 'package:la_fragata_app/screens/familias_screen.dart';
 import 'package:la_fragata_app/screens/home_screen.dart';
 import 'package:la_fragata_app/screens/porton_screen.dart';
+import 'package:la_fragata_app/screens/espacios_screen.dart';
 
 class RutasFragata {
   static const String rutaInicial = 'inicio';
@@ -29,6 +30,13 @@ class RutasFragata {
       etiqueta: 'Familias Residentes',
       descripcion: 'Lista de las 24 familias y su estado',
       pantalla: const FamiliasScreen(),
+    ),
+    AccesoMenu(
+      ruta: 'espacios',
+      icono: Icons.local_parking,
+      etiqueta: 'Espacios de Parqueo',
+      descripcion: 'Vehículos registrados por domicilio',
+      pantalla: const EspaciosScreen(),
     ),
   ];
 
