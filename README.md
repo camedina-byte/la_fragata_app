@@ -105,7 +105,7 @@ lib/
 ![Pago](screenshots/pago.png)
 
 ### Portón Abierto.
-![Portón Abierto](screenshots/porton_abierto.png)
+![Portón Abierto](screenshots/Porton_Abierto.png)
 
 ### Registro de Vehículos
 ![Registro](screenshots/espacios_detalle.png)
