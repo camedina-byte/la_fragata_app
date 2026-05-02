@@ -3,6 +3,7 @@ import 'package:la_fragata_app/data/datos_fragata.dart';
 import 'package:la_fragata_app/routes/rutas_fragata.dart';
 import 'package:la_fragata_app/theme/tema_fragata.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/gestures.dart';
 
 class PantallaInicio extends StatefulWidget {
   const PantallaInicio({super.key});
@@ -532,66 +533,113 @@ class _PantallaInicioState extends State<PantallaInicio> {
           const SizedBox(height: 8),
           SizedBox(
             height: 140,
-            child: PageView.builder(
-              controller: _controladorCarrusel,
-              itemCount: _noticias.length,
-              onPageChanged: (indice) =>
-                  setState(() => _paginaActual = indice),
-              itemBuilder: (context, indice) {
-                final noticia = _noticias[indice];
-                return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 4),
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: (noticia['color'] as Color).withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: (noticia['color'] as Color).withOpacity(0.3),
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: noticia['color'],
-                        radius: 28,
-                        child: Icon(
-                          noticia['icono'],
-                          color: Colors.white,
-                          size: 28,
+            child: Stack(
+              children: [
+                PageView.builder(
+                  controller: _controladorCarrusel,
+                  itemCount: _noticias.length,
+                  onPageChanged: (indice) =>
+                      setState(() => _paginaActual = indice),
+                  itemBuilder: (context, indice) {
+                    final noticia = _noticias[indice];
+                    return Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 32),
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: (noticia['color'] as Color).withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: (noticia['color'] as Color).withOpacity(0.3),
                         ),
                       ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              noticia['titulo'],
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: noticia['color'],
-                                fontSize: 14,
-                              ),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: noticia['color'],
+                            radius: 28,
+                            child: Icon(
+                              noticia['icono'],
+                              color: Colors.white,
+                              size: 28,
                             ),
-                            const SizedBox(height: 6),
-                            Text(
-                              noticia['descripcion'],
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Colors.black87,
-                              ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  noticia['titulo'],
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: noticia['color'],
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                const SizedBox(height: 6),
+                                Text(
+                                  noticia['descripcion'],
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                );
-              },
+                    );
+                  },
+                ),
+      // Flecha izquierda
+      Positioned(
+        left: 0,
+        top: 0,
+        bottom: 0,
+        child: Center(
+          child: IconButton(
+            onPressed: _paginaActual > 0
+                ? () => _controladorCarrusel.previousPage(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                    )
+                : null,
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: _paginaActual > 0
+                  ? TemaFragata.azulMarino
+                  : Colors.grey.shade300,
             ),
           ),
-
+        ),
+      ),
+      // Flecha derecha
+      Positioned(
+        right: 0,
+        top: 0,
+        bottom: 0,
+        child: Center(
+          child: IconButton(
+            onPressed: _paginaActual < _noticias.length - 1
+                ? () => _controladorCarrusel.nextPage(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                    )
+                : null,
+            icon: Icon(
+              Icons.arrow_forward_ios,
+              color: _paginaActual < _noticias.length - 1
+                  ? TemaFragata.azulMarino
+                  : Colors.grey.shade300,
+            ),
+          ),
+        ),
+      ),
+    ],
+  ),
+),
           // Indicadores del carrusel
           const SizedBox(height: 8),
           Row(
