@@ -16,7 +16,7 @@ class LaFragataApp extends StatelessWidget {
       title: 'La Fragata App',
       debugShowCheckedModeBanner: false,
       theme: TemaFragata.temaClaro,
-      initialRoute: RutasFragata.rutaInicial,
+      initialRoute: 'login',
       routes: RutasFragata.obtenerRutas(),
     );
   }

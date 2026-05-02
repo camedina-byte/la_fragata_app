@@ -359,6 +359,16 @@ class _PantallaInicioState extends State<PantallaInicio> {
               title: const Text('Versión 1.0.0'),
               subtitle: const Text('La Fragata App'),
             ),
+            ListTile(
+              leading: const Icon(Icons.logout, color: TemaFragata.rojoPendiente),
+              title: const Text(
+                'Cerrar Sesión',
+                style: TextStyle(color: TemaFragata.rojoPendiente),
+              ),
+              onTap: () {
+                Navigator.pushReplacementNamed(context, 'login');
+              },
+            ),
           ],
         ),
       ),

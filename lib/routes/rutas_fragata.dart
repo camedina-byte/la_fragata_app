@@ -5,6 +5,7 @@ import 'package:la_fragata_app/screens/familias_screen.dart';
 import 'package:la_fragata_app/screens/home_screen.dart';
 import 'package:la_fragata_app/screens/porton_screen.dart';
 import 'package:la_fragata_app/screens/espacios_screen.dart';
+import 'package:la_fragata_app/screens/login_screen.dart';
 
 class RutasFragata {
   static const String rutaInicial = 'inicio';
@@ -49,6 +50,8 @@ class RutasFragata {
       rutas[acceso.ruta] = (context) => acceso.pantalla;
     }
 
+    rutas['login'] = (context) => const LoginScreen();
+    
     return rutas;
   }
 }
