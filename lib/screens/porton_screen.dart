@@ -140,6 +140,7 @@ class _PortonScreenState extends State<PortonScreen> {
               const SizedBox(height: 24),
 
               // Aviso informativo
+              if (_portonAbierto)
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
