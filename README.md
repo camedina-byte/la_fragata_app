@@ -110,6 +110,9 @@ lib/
 ### Registro de Vehículos
 ![Registro](screenshots/espacios_detalle.png)
 
+### Información
+![Información](screenshots/informacion.png)
+
 ---
 
 ## Cómo ejecutar el proyecto
