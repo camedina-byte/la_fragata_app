@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:la_fragata_app/theme/tema_fragata.dart';
 
@@ -10,33 +11,81 @@ class PortonScreen extends StatefulWidget {
 
 class _PortonScreenState extends State<PortonScreen> {
   bool _portonAbierto = false;
-  bool _procesando = false;
+  bool _procesando    = false;
+  int  _segundos      = 30;
+  Timer? _temporizador;
+
+  void _iniciarContador() {
+    _segundos = 30;
+    _temporizador = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!mounted) {
+        timer.cancel();
+        return;
+      }
+      setState(() => _segundos--);
+
+      if (_segundos <= 0) {
+        timer.cancel();
+        _cerrarAutomatico();
+      }
+    });
+  }
+
+  Future<void> _cerrarAutomatico() async {
+    setState(() => _procesando = true);
+    await Future.delayed(const Duration(seconds: 2));
+    if (!mounted) return;
+    setState(() {
+      _portonAbierto = false;
+      _procesando    = false;
+      _segundos      = 30;
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('🔒 Portón cerrado automáticamente'),
+        backgroundColor: TemaFragata.azulMarino,
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
 
   Future<void> _accionarPorton() async {
+    _temporizador?.cancel();
     setState(() => _procesando = true);
-
-    // Simula tiempo de respuesta del motor
     await Future.delayed(const Duration(seconds: 2));
+    if (!mounted) return;
 
     setState(() {
       _portonAbierto = !_portonAbierto;
-      _procesando = false;
+      _procesando    = false;
     });
 
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            _portonAbierto
-                ? '✅ Portón abierto correctamente'
-                : '🔒 Portón cerrado correctamente',
-          ),
-          backgroundColor:
-              _portonAbierto ? TemaFragata.verdePagado : TemaFragata.azulMarino,
-          duration: const Duration(seconds: 2),
+				  
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          _portonAbierto
+              ? '✅ Portón abierto — se cerrará en 30 segundos'
+              : '🔒 Portón cerrado correctamente',
+			
+						  
+																				
+											   
         ),
-      );
-    }
+        backgroundColor: _portonAbierto
+            ? TemaFragata.verdePagado
+            : TemaFragata.azulMarino,
+        duration: const Duration(seconds: 2),
+      ),
+    );
+
+    if (_portonAbierto) _iniciarContador();
+  }
+
+  @override
+  void dispose() {
+    _temporizador?.cancel();
+    super.dispose();
   }
 
   @override
@@ -51,7 +100,7 @@ class _PortonScreenState extends State<PortonScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Ícono principal del portón
+              // Ícono principal
               AnimatedContainer(
                 duration: const Duration(milliseconds: 500),
                 width: 160,
@@ -101,7 +150,43 @@ class _PortonScreenState extends State<PortonScreen> {
                 ),
               ),
 
-              const SizedBox(height: 48),
+              const SizedBox(height: 16),
+
+              // Contador regresivo — solo visible cuando está abierto
+              if (_portonAbierto && !_procesando)
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ),
+                  decoration: BoxDecoration(
+                    color: TemaFragata.rojoPendiente.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: TemaFragata.rojoPendiente.withOpacity(0.4),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(
+                        Icons.timer,
+                        color: TemaFragata.rojoPendiente,
+                        size: 20,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Cierre automático en $_segundos segundos',
+                        style: const TextStyle(
+                          color: TemaFragata.rojoPendiente,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+              const SizedBox(height: 32),
 
               // Botón de acción
               _procesando
@@ -140,7 +225,7 @@ class _PortonScreenState extends State<PortonScreen> {
               const SizedBox(height: 24),
 
               // Aviso informativo
-              if (_portonAbierto)
+	      if (_portonAbierto)
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
